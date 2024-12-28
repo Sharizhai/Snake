@@ -5,6 +5,7 @@ import Grid from "../components/Grid";
 import Snake from "../components/Snake";
 import Apple from "../components/Apple";
 import Button from "../components/Button";
+import { useAudio } from '../context/AudioContext';
 import MaterialIconButton from "../components/MaterialIconButton";
 
 import eatSound from '../assets/sounds/eat-sound.mp3';
@@ -28,18 +29,23 @@ const GamePage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
+  const { isSoundEnabled, isMusicEnabled } = useAudio();
   const [volume, setVolume] = useState(0.1);
   const backgroundMusicRef = useRef(null);
 
   const playEatSound = () => {
-    const audio = new Audio(eatSound);
-    audio.play();
-  };
+    if (isSoundEnabled) {
+        const audio = new Audio(eatSound);
+        audio.play();
+    }
+};
 
-  const playGameOverSound = () => {
-    const audio = new Audio(gameOverSound);
-    audio.play();
-  };
+const playGameOverSound = () => {
+    if (isSoundEnabled) {
+        const audio = new Audio(gameOverSound);
+        audio.play();
+    }
+};
 
   const generateApple = useCallback(() => {
     let newApple;
@@ -129,21 +135,26 @@ const GamePage = () => {
 
   const handleBackgroundMusic = useCallback((action) => {
     if (!backgroundMusicRef.current) {
-      backgroundMusicRef.current = new Audio(backgroundMusic);
-      backgroundMusicRef.current.loop = true;
-      backgroundMusicRef.current.volume = volume;
+        backgroundMusicRef.current = new Audio(backgroundMusic);
+        backgroundMusicRef.current.loop = true;
+        backgroundMusicRef.current.volume = volume;
     }
-  
-    switch (action) {
-      case 'play':
-        backgroundMusicRef.current.play();
-        break;
-      case 'stop':
+
+    if (!isMusicEnabled) {
         backgroundMusicRef.current.pause();
-        backgroundMusicRef.current.currentTime = 0;
-        break;
+        return;
     }
-  }, [volume]);
+
+    switch (action) {
+        case 'play':
+            backgroundMusicRef.current.play();
+            break;
+        case 'stop':
+            backgroundMusicRef.current.pause();
+            backgroundMusicRef.current.currentTime = 0;
+            break;
+    }
+}, [volume, isMusicEnabled]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -237,6 +248,16 @@ const GamePage = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (backgroundMusicRef.current) {
+      if (isMusicEnabled && isPlaying) {
+        backgroundMusicRef.current.play();
+      } else {
+        backgroundMusicRef.current.pause();
+      }
+    }
+  }, [isMusicEnabled, isPlaying]);
 
   return (
     <>

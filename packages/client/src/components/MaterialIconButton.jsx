@@ -1,19 +1,20 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useAudio } from '../context/AudioContext';
+
 import styles from "../styles/components/MaterialIconButton.module.scss";
 
 const MaterialIconButton = ({ iconName: initialIconName, className, clickSound, onClick }) => {
     const navigate = useNavigate();
 
     const [currentIconName, setCurrentIconName] = useState(initialIconName);
-    const [isSoundOn, setIsSoundOn] = useState(true);
-    const [isMusicOn, setIsMusicOn] = useState(true);
 
     const audioRef = useRef(null);
+    const { isSoundEnabled, setIsSoundEnabled, isMusicEnabled, setIsMusicEnabled } = useAudio();
 
     const handleClick = async (e) => {
-        if (audioRef.current && clickSound) {
+        if (audioRef.current && clickSound && isSoundEnabled) {
             audioRef.current.currentTime = 0;
             await audioRef.current.play().catch(error => {
                 console.error("Erreur lors de la lecture du son :", error);
@@ -32,11 +33,21 @@ const MaterialIconButton = ({ iconName: initialIconName, className, clickSound, 
             }, 800);
         }
         else if (initialIconName === "volume_up" || initialIconName === "volume_off") {
-            setCurrentIconName(currentIconName === "volume_up" ? "volume_off" : "volume_up");
+            setIsSoundEnabled(!isSoundEnabled);
         }
         else if (initialIconName === "music_note" || initialIconName === "music_off") {
-            setCurrentIconName(currentIconName === "music_note" ? "music_off" : "music_note");
+            setIsMusicEnabled(!isMusicEnabled);
         }
+    };
+
+    const getIconName = () => {
+        if (initialIconName === "volume_up" || initialIconName === "volume_off") {
+            return isSoundEnabled ? "volume_up" : "volume_off";
+        }
+        if (initialIconName === "music_note" || initialIconName === "music_off") {
+            return isMusicEnabled ? "music_note" : "music_off";
+        }
+        return initialIconName;
     };
 
     return (
@@ -45,7 +56,7 @@ const MaterialIconButton = ({ iconName: initialIconName, className, clickSound, 
                 className={`material-symbols-outlined ${styles.materialButton} ${className}`}
                 onClick={handleClick}
             >
-                {currentIconName}
+                {getIconName()}
             </span>
             {clickSound && <audio ref={audioRef} src={clickSound} preload="auto" />}
         </>

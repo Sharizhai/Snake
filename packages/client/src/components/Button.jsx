@@ -1,5 +1,8 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+
+import { useAudio } from '../context/AudioContext';
+
 import styles from "../styles/components/Button.module.scss";
 
 const Button = ({ onClick,
@@ -13,10 +16,11 @@ const Button = ({ onClick,
 }) => {
     const combinedClassName = `${styles.buttonDefault} ${className || ''}`;
 
+    const { isSoundEnabled } = useAudio();
     const audioRef = useRef(null);
 
     const handleClick = async (e) => {
-        if (audioRef.current && clickSound) {
+        if (audioRef.current && clickSound && isSoundEnabled) {
             audioRef.current.currentTime = 0;
             await audioRef.current.play().catch(error => {
                 console.error("Erreur lors de la lecture du son :", error);
