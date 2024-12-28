@@ -1,0 +1,9 @@
+@import '../abstracts/mixins';
+
+.materialButton {
+    @include blue-text-shadow;
+
+    width: 25px;
+    cursor: pointer;
+    font-size: 25px;
+}

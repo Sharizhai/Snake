@@ -1,0 +1,16 @@
+.apple {
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%; // Pour la rendre ronde
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); // Pour un effet 3D léger
+    border: 1px solid black;
+
+    &.red {
+        background-color: #ff4d4d; // Rouge vif
+    }
+
+    &.purple {
+        background-color: #a64ca6; // Violet
+    }
+}

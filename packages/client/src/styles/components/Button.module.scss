@@ -1,0 +1,35 @@
+@import '../base/_variables';
+@import '../abstracts/mixins';
+
+.buttonDefault {
+    @include blue-text-shadow;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 70px;
+    border-radius: 6px;
+    border: 2px solid #FFFFFF;
+    background-color: $color-cell-background;
+    color: #FFFFFF;
+    font-size: 30px;
+    font-family: Balsamiq Sans, sans-serif;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+
+    &:hover {
+        @include blue-box-shadow;
+    }
+
+    &:active {
+        @include blue-box-shadow;
+        
+        transition: all 0.1s ease;
+        transform: scale(0.90);
+    }
+}

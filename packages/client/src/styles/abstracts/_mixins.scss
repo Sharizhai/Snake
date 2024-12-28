@@ -1,0 +1,43 @@
+@mixin no-margin-no-padding {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin pink-text-shadow {
+    text-shadow:
+        0 0 5px #F011DB,
+        0 0 10px #F011DB,
+        0 0 20px #B20171,
+        0 0 30px #B20171,
+        0 0 40px #6A014A,
+        0 0 50px #6A014A,
+        0 0 60px #6A014A;
+}
+
+@mixin blue-box-shadow {
+    box-shadow:
+        0 0 5px #39FFFF,
+        0 0 10px #39FFFF,
+        0 0 15px rgba(57, 255, 255, 0.5),
+        0 0 20px rgba(57, 255, 255, 0.5),
+        0 0 25px rgba(57, 255, 255, 0.5);
+}
+
+@mixin blue-text-shadow {
+    text-shadow:
+        0 0 5px #39FFFF,
+        0 0 10px #39FFFF,
+        0 0 15px rgba(57, 255, 255, 0.5),
+        0 0 20px rgba(57, 255, 255, 0.5),
+        0 0 25px rgba(57, 255, 255, 0.5);
+}
+
+@mixin grid-box-shadox {
+    box-shadow:
+        0 0 5px #39FFFF,
+        0 0 10px #39FFFF,
+        0 0 15px rgba(57, 255, 255, 0.5),
+        0 0 20px rgba(57, 255, 255, 0.5),
+        0 0 25px rgba(57, 255, 255, 0.5),
+        inset 0 0 5px rgba(57, 255, 255, 0.2);
+}
