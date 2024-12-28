@@ -1,0 +1,47 @@
+@import '../base/_variables';
+@import '../base/_typography';
+
+.mainContainer {
+    background-color: $color-cell-background;
+}
+
+.title {
+    @include no-margin-no-padding;
+    margin: 0;
+    padding: 0;
+    font-family: 'ThunderLC';
+    font-size: 60px;
+    color: #FFFFFF;
+    text-shadow: 
+        0 0 5px #F011DB,
+        0 0 10px #F011DB,
+        0 0 20px #B20171,
+        0 0 30px #B20171,
+        0 0 40px #6A014A,
+        0 0 50px #6A014A,
+        0 0 60px #6A014A;
+}
+
+.snake {
+    width: 40vw;
+}
+
+.scores {
+    margin: 0 0 50px 0;
+    padding: 0;
+    font-family: 'ThunderLC';
+    font-size: 60px;
+    color: #FFFFFF;
+    text-shadow: 
+        0 0 5px #F011DB,
+        0 0 10px #F011DB,
+        0 0 20px #B20171,
+        0 0 30px #B20171,
+        0 0 40px #6A014A,
+        0 0 50px #6A014A,
+        0 0 60px #6A014A;
+}
+
+.playerScrore {
+    font-family: Balsamiq Sans, sans-serif;
+}

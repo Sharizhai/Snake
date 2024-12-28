@@ -1,0 +1,53 @@
+@import '../base/_variables';
+@import '../abstracts/mixins';
+@import '../base/_typography';
+
+.mainContainer {
+    @include no-margin-no-padding;
+    background-color: $color-cell-background;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.mainTitle {
+    @include no-margin-no-padding;
+    @include pink-text-shadow;
+
+    font-family: 'ThunderLC';
+    font-size: 60px;
+    color: #FFFFFF;
+}
+
+.snake {
+    width: 40vw;
+    max-width: 300px;
+}
+
+.title {
+    @include pink-text-shadow;
+
+    margin: 30px 0 0 0;
+    padding: 0;
+    font-family: 'ThunderLC';
+    font-size: 40px;
+    color: #FFFFFF;
+}
+
+.scores {
+    @include pink-text-shadow;
+
+    margin: 0 0 50px 0;
+    padding: 0;
+    font-family: 'ThunderLC';
+    font-size: 60px;
+    color: #FFFFFF;
+}
+
+.playerScore {
+    font-family: Balsamiq Sans, sans-serif;
+    font-size: 18px;
+}
